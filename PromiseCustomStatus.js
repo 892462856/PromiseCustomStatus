@@ -178,4 +178,11 @@ var PromiseCustomStatus = function (Statuss) {
 };//status={status1,status2,status3,……}//自定义状态 //Statuss最后一个默认 是错误监听函数
 //粗略测试使用了一下
 
+//使用示例：
 var Promise = PromiseCustomStatus({OK:1,CANCEL:1});//只有两个状态的常用 Promise对象
+var Promise = PromiseCustomStatus({OK:1,CANCEL:1,WAIT:1});//有3个状态的Promise对象
+var promise=new Promise(function(ok,cancel,wait){
+	///////////////
+});
+ promise.then(function(data){},function(data){},function(data){});
+ promise.OK(function(data){}).WAIT(function(data){}).CANCEL(function(data){}).finality(function(data){});
