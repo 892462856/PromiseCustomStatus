@@ -93,14 +93,13 @@ var PromiseCustomStatus = function (Statuss) {
         {
             var userMonitors = arguments;//userFullMonitor, userFailMonitor
             var self = this;
-            self.ufn = userFullMonitor;
+            //self.ufn = userFullMonitor;//测试的
             return new Promise(function (resultFullMonitor, resultFailMonitor) {
                 var resultMonitors = arguments; //resultFullMonitor, resultFailMonitor
                 var j = 0;
                 var wrapResultMonitors = Object.select(Statuss, function (json, key, item)
                 {
-                    json[key] = _wrapMonitor(j, userMonitors, resultMonitors);
-                    j++;
+                    json[key] = _wrapMonitor(j++, userMonitors, resultMonitors);
                 });
                 self._userMonitors.push(wrapResultMonitors);
                 monitorProxy.call(self);
@@ -122,7 +121,7 @@ var PromiseCustomStatus = function (Statuss) {
         };
         return function (index) {
             return function (userMonitor) {
-                func.call(this, index, userMonitor);
+                return func.call(this, index, userMonitor);
             };
         };
     }();//监听单个状态的函数
